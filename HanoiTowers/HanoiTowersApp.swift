@@ -9,24 +9,12 @@ import SwiftUI
 import SwiftData
 
 @main
-struct HanoiTowersApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+struct HanoiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let api = HanoiAPI(baseURL: URL(string: "http://127.0.0.1:8000/")!)
+            ContentView(vm: HanoiViewModel(api: api))
         }
-        .modelContainer(sharedModelContainer)
     }
 }
+
