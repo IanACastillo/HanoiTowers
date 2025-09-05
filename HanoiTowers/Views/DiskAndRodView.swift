@@ -10,13 +10,37 @@ import SwiftUI
 struct DiskView: View {
     let sizeIndex: Int  // 1 = smallest, larger = wider
     let maxSize: Int
+    
+    // Cycle colors every 3: 1→navy, 2→green, 3→orange, 4→navy, ...
+    private var diskColor: Color {
+        switch (sizeIndex - 1) % 3 {
+        case 0:
+            // Navy blue
+            return Color(.sRGB, red: 0.0, green: 0.0, blue: 0.5, opacity: 1.0)
+        case 1:
+            // Opaque green (slightly translucent for a modern look)
+            return Color.green.opacity(0.8)
+        default:
+            // Opaque orange
+            return Color.orange.opacity(0.8)
+        }
+    }
+    
     var body: some View {
         let width = CGFloat(60 + (sizeIndex - 1) * 18)
         RoundedRectangle(cornerRadius: 8)
+            .fill(diskColor)
             .frame(width: width, height: 24)
-            .overlay(Text("\(sizeIndex)").font(.caption).bold().foregroundStyle(.white))
+            .overlay(
+                Text("\(sizeIndex)")
+                    .font(.caption).bold()
+                    .foregroundStyle(.white)
+                    .shadow(radius: 1)
+            )
+            .shadow(radius: 2, y: 1) // subtle depth
     }
 }
+
 
 struct RodView: View {
     let label: String

@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @StateObject var vm: HanoiViewModel
-    @State private var backendURLString: String = "http://127.0.0.1:8000/"
+    @State private var backendURLString: String = "https://hanoitowers.onrender.com/"
     
     var body: some View {
         NavigationStack {

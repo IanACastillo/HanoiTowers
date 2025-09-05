@@ -12,7 +12,8 @@ import SwiftData
 struct HanoiApp: App {
     var body: some Scene {
         WindowGroup {
-            let api = HanoiAPI(baseURL: URL(string: "http://127.0.0.1:8000/")!)
+            // Always use cloud service
+            let api = HanoiAPI(baseURL: URL(string: "https://hanoitowers.onrender.com/")!)
             ContentView(vm: HanoiViewModel(api: api))
         }
     }
